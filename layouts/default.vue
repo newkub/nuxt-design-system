@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar />
-    <main class="pt-16">
+    <main class="container mx-auto pt-16">
       <slot />
     </main>
   </div>
