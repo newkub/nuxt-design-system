@@ -1,5 +1,8 @@
 <script setup lang="ts">
 // Composables page
+definePageMeta({
+  layout: 'docs'
+})
 </script>
 
 <template>

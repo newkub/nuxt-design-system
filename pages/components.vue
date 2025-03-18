@@ -1,5 +1,8 @@
 <script setup lang="ts">
 // Components page
+definePageMeta({
+  layout: 'docs'
+})
 </script>
 
 <template>
