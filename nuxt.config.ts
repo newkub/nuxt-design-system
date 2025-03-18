@@ -5,17 +5,17 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   modules: [
-    '@pinia/nuxt', 
-    '@nuxtjs/color-mode', 
     '@unocss/nuxt',
+    '@pinia/nuxt', 
+    '@nuxtjs/color-mode'
   ],
   colorMode: {
     preference: 'system',
     fallback: 'light',
     classSuffix: ''
   },
-  
   css: [
-    '@unocss/reset/tailwind.css',
-  ],
+    '@unocss/reset/normalize.css',
+    '@unocss/reset/tailwind.css'
+  ]
 })
