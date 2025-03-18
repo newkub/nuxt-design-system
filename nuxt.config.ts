@@ -8,5 +8,11 @@ export default defineNuxtConfig({
     plugins: [
       Unocss()
     ]
+  },
+  modules: ['@pinia/nuxt', '@nuxtjs/color-mode', '@unocss/nuxt'],
+  colorMode: {
+    preference: 'system',
+    fallback: 'light',
+    classSuffix: ''
   }
 })
