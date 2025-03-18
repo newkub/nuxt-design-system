@@ -6,7 +6,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   vite: {
     plugins: [
-      Unocss()
+      Unocss({
+        uno: true,
+        attributify: true,
+        icons: true,
+        shortcuts: [],
+        rules: [],
+        theme: {
+          colors: {},
+        },
+      })
     ]
   },
   modules: ['@pinia/nuxt', '@nuxtjs/color-mode', '@unocss/nuxt'],
@@ -14,5 +23,8 @@ export default defineNuxtConfig({
     preference: 'system',
     fallback: 'light',
     classSuffix: ''
-  }
+  },
+  css: [
+    '@unocss/reset/tailwind.css',
+  ],
 })
