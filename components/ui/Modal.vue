@@ -2,10 +2,20 @@
 import { ref, watch } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
-const props = defineProps({
-  isOpen: { type: Boolean, required: true },
-  size: { type: String, default: 'md', validator: (value: string) => ['sm', 'md', 'lg'].includes(value) },
-  closeOnClickOutside: { type: Boolean, default: true }
+interface ModalProps {
+  isOpen: boolean
+  size?: 'sm' | 'md' | 'lg'
+  closeOnClickOutside?: boolean
+  class?: string
+  variantGroup?: string
+  darkClass?: string
+  overlayClass?: string
+}
+
+const props = withDefaults(defineProps<ModalProps>(), {
+  isOpen: false,
+  size: 'md',
+  closeOnClickOutside: true
 })
 
 const emit = defineEmits(['close'])
@@ -27,9 +37,9 @@ if (props.closeOnClickOutside) {
 
 <template>
   <Transition name="fade">
-    <div v-if="isOpen" class="fixed inset-0 z-50">
+    <div v-if="props.isOpen" class="fixed inset-0 z-50">
       <!-- Overlay -->
-      <div class="fixed inset-0 bg-black/50" aria-hidden="true" />
+      <div class="fixed inset-0 bg-black/50" aria-hidden="true" :class="props.overlayClass" />
 
       <!-- Modal container -->
       <div class="fixed inset-0 flex items-center justify-center p-4">
@@ -37,11 +47,16 @@ if (props.closeOnClickOutside) {
         <div
           ref="modalRef"
           class="bg-white rounded-lg shadow-lg w-full"
-          :class="{
-            'max-w-sm': size === 'sm',
-            'max-w-md': size === 'md',
-            'max-w-lg': size === 'lg'
-          }"
+          :class="[
+            props.class,
+            props.variantGroup,
+            props.darkClass,
+            {
+              'max-w-sm': props.size === 'sm',
+              'max-w-md': props.size === 'md',
+              'max-w-lg': props.size === 'lg'
+            }
+          ]"
           role="dialog"
           aria-modal="true"
         >
@@ -65,10 +80,10 @@ if (props.closeOnClickOutside) {
   </Transition>
 </template>
 
-<style scoped>
+<style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s;
+  transition: opacity 200ms;
 }
 
 .fade-enter-from,

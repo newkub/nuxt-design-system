@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-recommended-vue",
+    "stylelint-config-recommended-vue/scss"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "indentation": ["tab"],
+    "color-hex-case": "upper"
+  }
+}

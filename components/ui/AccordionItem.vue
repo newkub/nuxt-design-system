@@ -1,14 +1,23 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { inject, ref, withDefaults, defineProps } from 'vue'
 
-const { activeItems, toggleItem } = inject('accordion') as {
+interface AccordionContext {
   activeItems: number[]
   toggleItem: (index: number) => void
 }
 
-const props = defineProps({
-  index: { type: Number, required: true },
-  disabled: { type: Boolean, default: false }
+interface Props {
+  index: number
+  disabled?: boolean
+}
+
+const { activeItems, toggleItem } = inject<AccordionContext>('accordion', {
+  activeItems: [],
+  toggleItem: () => {}
+})
+
+const props = withDefaults(defineProps<Props>(), {
+  disabled: false
 })
 
 const isOpen = ref(activeItems.includes(props.index))
@@ -41,3 +50,16 @@ const toggle = () => {
     </Transition>
   </div>
 </template>
+
+<style scoped>
+.accordion-enter-active,
+.accordion-leave-active {
+  transition: all 0.3s ease;
+}
+
+.accordion-enter-from,
+.accordion-leave-to {
+  opacity: 0;
+  max-height: 0;
+}
+</style>

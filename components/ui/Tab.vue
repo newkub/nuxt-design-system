@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 
-const { activeTab, setActiveTab } = inject('tabs') as {
+const { activeTab, setActiveTab } = inject('tabs', {
+  activeTab: 0,
+  setActiveTab: () => {}
+}) as {
   activeTab: number
   setActiveTab: (index: number) => void
 }

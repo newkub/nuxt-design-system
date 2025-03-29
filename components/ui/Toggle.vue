@@ -1,70 +1,31 @@
 <template>
-  <label class="toggle">
+  <label class="relative inline-block w-10 h-6">
     <input
       type="checkbox"
       :checked="modelValue"
-      @change="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
-      class="toggle__input"
+      @change="emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
+      class="opacity-0 w-0 h-0"
+      aria-label="Toggle switch"
     />
-    <span class="toggle__slider" />
+    <span 
+      class="absolute cursor-pointer inset-0 bg-gray-200 rounded-full transition-all duration-200
+             before:(absolute content-empty h-5 w-5 left-0.5 bottom-0.5 bg-white rounded-full transition-all duration-200)
+             checked:(bg-blue-500 before:translate-x-4)
+             focus:(ring-2 ring-blue-500/10)
+             dark:(bg-gray-600)"
+    />
   </label>
 </template>
 
 <script setup lang="ts">
-defineProps<{
+interface ToggleProps {
   modelValue?: boolean
-}>()
+}
 
-defineEmits(['update:modelValue'])
+const props = withDefaults(defineProps<ToggleProps>(), {
+  modelValue: false
+})
+
+const emit = defineEmits(['update:modelValue'])
 </script>
 
-<style scoped>
-.toggle {
-  position: relative;
-  display: inline-block;
-  width: 2.5rem;
-  height: 1.5rem;
-}
-
-.toggle__input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle__slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #e5e7eb;
-  border-radius: 2rem;
-  transition: all 0.2s;
-}
-
-.toggle__slider::before {
-  position: absolute;
-  content: '';
-  height: 1.25rem;
-  width: 1.25rem;
-  left: 0.125rem;
-  bottom: 0.125rem;
-  background-color: white;
-  border-radius: 50%;
-  transition: all 0.2s;
-}
-
-.toggle__input:checked + .toggle__slider {
-  background-color: #3b82f6;
-}
-
-.toggle__input:checked + .toggle__slider::before {
-  transform: translateX(1rem);
-}
-
-.toggle__input:focus + .toggle__slider {
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-</style>

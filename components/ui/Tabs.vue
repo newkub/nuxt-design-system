@@ -19,12 +19,13 @@ const setActiveTab = (index: number) => {
 
 provide('tabs', {
   activeTab,
-  setActiveTab
+  setActiveTab: (index: number) => setActiveTab(index)
 })
 </script>
 
 <template>
   <div class="flex" :class="{ 'flex-col': vertical, 'flex-row': !vertical }">
-    <slot />
+    <Tab :index="0" :active="activeTab.value === 0">Tab 1</Tab>
+    <Tab :index="1" :active="activeTab.value === 1">Tab 2</Tab>
   </div>
 </template>

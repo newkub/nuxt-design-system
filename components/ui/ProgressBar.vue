@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+interface Props {
+  value?: number
+  max?: number
+  type?: 'linear' | 'circular'
+  color?: string
+  thickness?: number
+  showLabel?: boolean
+}
 
-const props = defineProps({
-  value: { type: Number, default: 0 },
-  max: { type: Number, default: 100 },
-  type: {
-    type: String,
-    default: 'linear',
-    validator: (value: string) => ['linear', 'circular'].includes(value)
-  },
-  color: { type: String, default: '#3b82f6' },
-  thickness: { type: Number, default: 8 },
-  showLabel: { type: Boolean, default: false }
+const props = withDefaults(defineProps<Props>(), {
+  value: 0,
+  max: 100,
+  type: 'linear',
+  color: 'primary-500',
+  thickness: 8,
+  showLabel: false
 })
 
 const percentage = computed(() => {
@@ -32,12 +35,12 @@ const circularProps = computed(() => {
 <template>
   <div class="relative" role="progressbar" :aria-valuenow="value" :aria-valuemin="0" :aria-valuemax="max">
     <!-- Linear Progress -->
-    <div v-if="type === 'linear'" class="w-full bg-gray-200 rounded-full overflow-hidden">
+    <div v-if="type === 'linear'" class="w-full bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700">
       <div
         class="h-4 transition-all duration-300 ease-in-out"
+        :class="`bg-${props.color}`"
         :style="{
-          width: `${percentage}%`,
-          backgroundColor: color
+          width: `${percentage}%`
         }"
       />
     </div>
@@ -49,7 +52,7 @@ const circularProps = computed(() => {
         cy="50"
         :r="circularProps.radius"
         stroke-width="8"
-        stroke="#e2e8f0"
+        class="stroke-gray-200 dark:stroke-gray-700"
         fill="transparent"
       />
       <circle
@@ -59,7 +62,7 @@ const circularProps = computed(() => {
         :stroke-width="thickness"
         :stroke-dasharray="circularProps.circumference"
         :stroke-dashoffset="circularProps.dashOffset"
-        :stroke="color"
+        :class="`stroke-${props.color}`"
         fill="transparent"
         class="transition-all duration-300 ease-in-out"
       />
@@ -71,7 +74,7 @@ const circularProps = computed(() => {
       class="absolute inset-0 flex items-center justify-center text-sm font-medium"
       :class="{
         'text-white': type === 'linear',
-        'text-gray-700': type === 'circular'
+        'text-gray-700 dark:text-gray-200': type === 'circular'
       }"
     >
       <slot>

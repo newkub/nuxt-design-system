@@ -1,57 +1,31 @@
 <template>
-  <label class="radio">
+  <label class="flex items-center gap-2 cursor-pointer">
     <input
       type="radio"
-      :value="value"
-      :checked="modelValue === value"
-      @change="$emit('update:modelValue', value)"
-      class="radio__input"
+      :value="props.value"
+      :checked="props.modelValue === props.value"
+      @change="emit('update:modelValue', props.value)"
+      class="w-4 h-4 border border-gray-300 rounded-full appearance-none transition-colors
+        checked:(bg-primary-500 border-primary-500)
+        focus:(ring-2 ring-primary-500/30)
+        dark:(border-gray-600)"
     />
-    <span class="radio__label">
+    <span class="text-sm text-gray-700 dark:text-gray-200">
       <slot />
     </span>
   </label>
 </template>
 
 <script setup lang="ts">
-defineProps<{
+interface Props {
   value: string | number
   modelValue?: string | number
-}>()
+}
 
-defineEmits(['update:modelValue'])
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: ''
+})
+
+const emit = defineEmits(['update:modelValue'])
 </script>
 
-<style scoped>
-.radio {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-}
-
-.radio__input {
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 50%;
-  appearance: none;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.radio__input:checked {
-  background-color: #3b82f6;
-  border-color: #3b82f6;
-}
-
-.radio__input:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.radio__label {
-  font-size: 0.875rem;
-  color: #4b5563;
-}
-</style>

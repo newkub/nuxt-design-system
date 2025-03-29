@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 
-const { activeTab } = inject('tabs') as {
-  activeTab: number
-}
+const { activeTab } = inject('tabs', { activeTab: 0 })
 
 const props = defineProps({
   index: { type: Number, required: true }

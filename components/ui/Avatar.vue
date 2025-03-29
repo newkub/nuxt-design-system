@@ -1,65 +1,32 @@
 <template>
-  <div :class="['avatar', { 'avatar--small': size === 'small', 'avatar--large': size === 'large' }]">
+  <div class="inline-flex items-center justify-center rounded-full overflow-hidden bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300" 
+       :class="[
+         size === 'small' ? 'w-8 h-8 text-xs' : 
+         size === 'large' ? 'w-16 h-16 text-xl' : 
+         'w-12 h-12 text-base'
+       ]">
     <img
       v-if="src"
       :src="src"
       :alt="alt"
-      class="avatar__image"
+      class="w-full h-full object-cover"
     />
-    <div v-else class="avatar__placeholder">
+    <div v-else class="font-medium uppercase">
       {{ initials }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{
+interface AvatarProps {
   src?: string
   alt?: string
   initials?: string
   size?: 'small' | 'medium' | 'large'
-}>(), {
-  size: 'medium'
+}
+
+const props = withDefaults(defineProps<AvatarProps>(), {
+  size: 'medium',
+  initials: ''
 })
 </script>
-
-<style scoped>
-.avatar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: #e5e7eb;
-  color: #4b5563;
-}
-
-.avatar--small {
-  width: 2rem;
-  height: 2rem;
-  font-size: 0.75rem;
-}
-
-.avatar--medium {
-  width: 3rem;
-  height: 3rem;
-  font-size: 1rem;
-}
-
-.avatar--large {
-  width: 4rem;
-  height: 4rem;
-  font-size: 1.25rem;
-}
-
-.avatar__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.avatar__placeholder {
-  font-weight: 500;
-  text-transform: uppercase;
-}
-</style>

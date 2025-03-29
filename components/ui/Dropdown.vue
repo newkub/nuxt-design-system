@@ -1,23 +1,14 @@
 <script setup lang="ts">
-interface PositionClasses {
-  bottom: string
-  top: string
-  left: string
-  right: string
+interface Props {
+  position?: 'bottom' | 'top' | 'left' | 'right'
+  trigger?: 'click' | 'hover'
+  disabled?: boolean
 }
 
-const props = defineProps({
-  position: {
-    type: String as () => keyof PositionClasses,
-    default: 'bottom',
-    validator: (value: string) => ['bottom', 'top', 'left', 'right'].includes(value)
-  },
-  trigger: {
-    type: String,
-    default: 'click',
-    validator: (value: string) => ['click', 'hover'].includes(value)
-  },
-  disabled: { type: Boolean, default: false }
+const props = withDefaults(defineProps<Props>(), {
+  position: 'bottom',
+  trigger: 'click',
+  disabled: false
 })
 
 const isOpen = ref(false)
@@ -27,7 +18,7 @@ const toggleDropdown = () => {
   isOpen.value = !isOpen.value
 }
 
-const positionClasses: PositionClasses = {
+const positionClasses = {
   bottom: 'top-full mt-2',
   top: 'bottom-full mb-2',
   left: 'right-full mr-2',
@@ -39,35 +30,36 @@ const positionClasses: PositionClasses = {
   <div class="relative inline-block">
     <!-- Trigger element -->
     <div
-      @click="trigger === 'click' && toggleDropdown()"
-      @mouseenter="trigger === 'hover' && !disabled && (isOpen = true)"
-      @mouseleave="trigger === 'hover' && !disabled && (isOpen = false)"
+      @click="props.trigger === 'click' && toggleDropdown()"
+      @mouseenter="props.trigger === 'hover' && !props.disabled && (isOpen = true)"
+      @mouseleave="props.trigger === 'hover' && !props.disabled && (isOpen = false)"
     >
       <slot />
     </div>
 
     <!-- Dropdown content -->
-    <Transition name="fade">
+    <Transition
+      enter-active-class="transition-opacity duration-150"
+      enter-from-class="opacity-0"
+      leave-active-class="transition-opacity duration-150"
+      leave-to-class="opacity-0"
+    >
       <div
-        v-if="isOpen && !disabled"
-        class="absolute z-50 bg-white rounded-md shadow-lg"
+        v-if="isOpen && !props.disabled"
+        class="absolute z-50 bg-white dark:bg-gray-800 rounded-md shadow-lg dark:shadow-gray-900"
         :class="positionClasses[props.position]"
         role="menu"
       >
-        <slot name="content" />
+        <slot name="content">
+          <div
+            class="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+            role="menuitem"
+            @click="$emit('click', $event)"
+          >
+            <slot name="item" />
+          </div>
+        </slot>
       </div>
     </Transition>
   </div>
 </template>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.15s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

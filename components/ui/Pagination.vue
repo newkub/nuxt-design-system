@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+interface Props {
+  totalItems: number
+  itemsPerPage?: number
+  currentPage?: number
+  maxVisibleButtons?: number
+}
 
-const props = defineProps({
-  totalItems: { type: Number, required: true },
-  itemsPerPage: { type: Number, default: 10 },
-  currentPage: { type: Number, default: 1 },
-  maxVisibleButtons: { type: Number, default: 5 }
+const props = withDefaults(defineProps<Props>(), {
+  itemsPerPage: 10,
+  currentPage: 1,
+  maxVisibleButtons: 5
 })
 
 const emit = defineEmits(['update:currentPage'])
@@ -42,25 +46,25 @@ const goToPage = (page: number) => {
   <nav class="flex items-center justify-center gap-2" role="navigation">
     <!-- Previous Button -->
     <button
-      class="px-3 py-1 rounded-md"
-      :class="{
-        'bg-gray-200 cursor-not-allowed': currentPage === 1,
-        'hover:bg-gray-100': currentPage > 1
-      }"
+      class="px-3 py-1 rounded-md transition-colors"
+      :class="[
+        currentPage === 1 ? 'bg-gray-200 cursor-not-allowed' : 'hover:(bg-gray-100 dark:bg-gray-700)',
+        'dark:(bg-gray-800 text-gray-100)'
+      ]"
       @click="goToPage(currentPage - 1)"
       :disabled="currentPage === 1"
     >
-      Previous
+      <div class="i-[mdi-chevron-left]" />
     </button>
 
     <!-- Page Buttons -->
     <template v-for="page in visiblePages" :key="page">
       <button
-        class="px-3 py-1 rounded-md"
-        :class="{
-          'bg-blue-500 text-white': page === currentPage,
-          'hover:bg-gray-100': page !== currentPage
-        }"
+        class="px-3 py-1 rounded-md transition-colors"
+        :class="[
+          page === currentPage ? 'bg-blue-500 text-white' : 'hover:(bg-gray-100 dark:bg-gray-700)',
+          'dark:(bg-gray-800 text-gray-100)'
+        ]"
         @click="goToPage(page)"
       >
         {{ page }}
@@ -69,15 +73,15 @@ const goToPage = (page: number) => {
 
     <!-- Next Button -->
     <button
-      class="px-3 py-1 rounded-md"
-      :class="{
-        'bg-gray-200 cursor-not-allowed': currentPage === totalPages,
-        'hover:bg-gray-100': currentPage < totalPages
-      }"
+      class="px-3 py-1 rounded-md transition-colors"
+      :class="[
+        currentPage === totalPages ? 'bg-gray-200 cursor-not-allowed' : 'hover:(bg-gray-100 dark:bg-gray-700)',
+        'dark:(bg-gray-800 text-gray-100)'
+      ]"
       @click="goToPage(currentPage + 1)"
       :disabled="currentPage === totalPages"
     >
-      Next
+      <div class="i-[mdi-chevron-right]" />
     </button>
   </nav>
 </template>

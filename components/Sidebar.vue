@@ -1,57 +1,61 @@
 <template>
-  <aside class="sidebar">
-    <div class="logo">
-      <NuxtLink to="/">
-        <Logo />
+  <aside 
+    class="w-240px h-screen fixed left-0 top-0 p-4 border-r border-gray-200 bg-white transition-(width duration-300 ease) dark:(bg-gray-900 border-gray-700)" 
+    :class="{'w-64px': isCollapsed}"
+  >
+    <button 
+      @click="toggleCollapse" 
+      class="absolute right-2 top-2 p-2 rounded-md bg-gray-100 text-gray-500 transition-(all duration-200) hover:(bg-gray-200 text-gray-900) dark:(bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white)" 
+      aria-label="Toggle sidebar"
+    >
+      <span v-if="!isCollapsed" class="i-carbon-collapse-categories"></span>
+      <span v-else class="i-carbon-expand-categories"></span>
+    </button>
+    <nav class="flex flex-col gap-2">
+      <NuxtLink 
+        v-for="(link, index) in props.links" 
+        :key="index" 
+        :to="link.to" 
+        class="p-2 rounded-md text-gray-500 transition-(all duration-200) hover:(bg-gray-100 text-gray-900) router-link-active:(bg-gray-200 text-gray-900) dark:(text-gray-400 hover:bg-gray-700 hover:text-white router-link-active:bg-gray-800 router-link-active:text-white)"
+      >
+        <span v-if="link.icon" :class="link.icon" class="mr-2"></span>
+        <span v-if="!isCollapsed">{{ link.text }}</span>
       </NuxtLink>
-    </div>
-    <nav class="navigation">
-      <NuxtLink to="/components" class="nav-link">Components</NuxtLink>
-      <NuxtLink to="/composables" class="nav-link">Composables</NuxtLink>
     </nav>
+    <div v-if="props.user" class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+      <Avatar 
+        :src="props.user.avatar" 
+        :initials="props.user.name.split(' ').map(n => n[0]).join('')"
+        size="small"
+        class="mx-auto"
+      />
+    </div>
   </aside>
 </template>
 
 <script setup lang="ts">
-import Logo from '~/components/ui/Logo.vue'
+import Avatar from '~/components/ui/Avatar.vue'
+import { ref } from 'vue'
+
+interface Props {
+  defaultCollapsed?: boolean
+  links?: { text: string; to: string; icon?: string }[]
+  user?: {
+    name: string
+    avatar?: string
+  }
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  defaultCollapsed: false,
+  links: () => [
+    { text: 'Components', to: '/components', icon: 'i-carbon-components' },
+    { text: 'Composables', to: '/composables', icon: 'i-carbon-function' }
+  ]
+})
+
+const isCollapsed = ref(props.defaultCollapsed)
+const toggleCollapse = () => {
+  isCollapsed.value = !isCollapsed.value
+}
 </script>
-
-<style scoped>
-.sidebar {
-  width: 240px;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  padding: 1rem;
-  border-right: 1px solid #e5e7eb;
-  background: white;
-}
-
-.logo {
-  margin-bottom: 2rem;
-}
-
-.navigation {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.nav-link {
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  color: #4b5563;
-  transition: all 0.2s;
-}
-
-.nav-link:hover {
-  background: #f3f4f6;
-  color: #111827;
-}
-
-.nav-link.router-link-active {
-  background: #e5e7eb;
-  color: #111827;
-}
-</style>

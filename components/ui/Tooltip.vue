@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+interface TooltipProps {
+  content?: string
+  position?: 'top' | 'bottom' | 'left' | 'right'
+  delay?: number
+  disabled?: boolean
+}
 
-const props = defineProps({
-  content: { type: String, default: '' },
-  position: {
-    type: String,
-    default: 'top',
-    validator: (value: string) => ['top', 'bottom', 'left', 'right'].includes(value)
-  },
-  delay: { type: Number, default: 100 },
-  disabled: { type: Boolean, default: false }
+const props = withDefaults(defineProps<TooltipProps>(), {
+  content: '',
+  position: 'top',
+  delay: 100,
+  disabled: false
 })
 
 const show = ref(false)
@@ -36,43 +37,38 @@ const hideTooltip = () => {
     <slot />
 
     <!-- Tooltip content -->
-    <Transition name="fade">
+    <Transition
+      enter-active-class="transition-opacity duration-150"
+      enter-from-class="opacity-0"
+      leave-active-class="transition-opacity duration-150"
+      leave-to-class="opacity-0"
+    >
       <div
-        v-if="show && !disabled"
+        v-if="show && !props.disabled"
         role="tooltip"
-        class="absolute z-50 px-3 py-2 text-sm text-white bg-gray-800 rounded-md shadow-lg"
+        class="absolute z-50 px-3 py-2 text-sm text-white bg-gray-800 rounded-md shadow-lg
+               dark:(bg-gray-700)"
         :class="{
-          'bottom-full mb-2': position === 'top',
-          'top-full mt-2': position === 'bottom',
-          'right-full mr-2': position === 'left',
-          'left-full ml-2': position === 'right'
+          'bottom-full mb-2': props.position === 'top',
+          'top-full mt-2': props.position === 'bottom',
+          'right-full mr-2': props.position === 'left',
+          'left-full ml-2': props.position === 'right'
         }"
       >
         <slot name="content">
-          {{ content }}
+          {{ props.content }}
         </slot>
         <div
-          class="absolute w-2 h-2 bg-gray-800 rotate-45"
+          class="absolute w-2 h-2 bg-gray-800 rotate-45
+                 dark:(bg-gray-700)"
           :class="{
-            'bottom-[-0.25rem] left-1/2 -translate-x-1/2': position === 'top',
-            'top-[-0.25rem] left-1/2 -translate-x-1/2': position === 'bottom',
-            'right-[-0.25rem] top-1/2 -translate-y-1/2': position === 'left',
-            'left-[-0.25rem] top-1/2 -translate-y-1/2': position === 'right'
+            'bottom-[-0.25rem] left-1/2 -translate-x-1/2': props.position === 'top',
+            'top-[-0.25rem] left-1/2 -translate-x-1/2': props.position === 'bottom',
+            'right-[-0.25rem] top-1/2 -translate-y-1/2': props.position === 'left',
+            'left-[-0.25rem] top-1/2 -translate-y-1/2': props.position === 'right'
           }"
         />
       </div>
     </Transition>
   </div>
 </template>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.15s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

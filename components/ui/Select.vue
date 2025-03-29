@@ -1,17 +1,29 @@
 <template>
-  <select
-    :class="['select', { 'select--error': error }]"
-    :value="modelValue"
-    @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
-  >
-    <option
-      v-for="option in options"
-      :key="option.value"
-      :value="option.value"
+  <div class="relative">
+    <select
+      :class="[
+        'w-full px-4 py-2 border rounded-md cursor-pointer transition-colors',
+        'bg-white dark:bg-gray-800',
+        'border-gray-300 dark:border-gray-600',
+        'focus:(border-primary-500 ring-2 ring-primary-500/30)',
+        props.error ? 'border-error-500 focus:(border-error-500 ring-error-500/30)' : ''
+      ]"
+      :value="props.modelValue"
+      @change="emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
     >
-      {{ option.label }}
-    </option>
-  </select>
+      <option
+        v-for="option in props.options"
+        :key="option.value"
+        :value="option.value"
+        class="bg-white dark:bg-gray-800"
+      >
+        {{ option.label }}
+      </option>
+    </select>
+    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+      <div class="i-[mdi-chevron-down] text-gray-400" />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -20,38 +32,17 @@ interface Option {
   label: string
 }
 
-defineProps<{
+interface Props {
   options: Option[]
   modelValue?: string | number
   error?: boolean
-}>()
+}
 
-defineEmits(['update:modelValue'])
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: '',
+  error: false
+})
+
+const emit = defineEmits(['update:modelValue'])
 </script>
 
-<style scoped>
-.select {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.375rem;
-  background-color: white;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.select:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.select--error {
-  border-color: #ef4444;
-}
-
-.select--error:focus {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-</style>

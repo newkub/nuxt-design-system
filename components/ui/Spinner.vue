@@ -1,13 +1,16 @@
 <script setup lang="ts">
-const props = defineProps({
-  size: {
-    type: String,
-    default: 'md',
-    validator: (value: string) => ['sm', 'md', 'lg'].includes(value)
-  },
-  color: { type: String, default: '#3b82f6' },
-  speed: { type: String, default: '1s' },
-  thickness: { type: Number, default: 4 }
+interface Props {
+  size?: 'sm' | 'md' | 'lg'
+  color?: string
+  speed?: string
+  thickness?: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  size: 'md',
+  color: 'primary-500',
+  speed: '1s',
+  thickness: 4
 })
 
 const sizes = {
@@ -18,13 +21,10 @@ const sizes = {
 </script>
 
 <template>
-  <div role="status">
+  <div role="status" class="flex justify-center">
     <svg
       class="animate-spin"
-      :class="sizes[size as keyof typeof sizes]"
-      :style="{
-        animationDuration: speed
-      }"
+      :class="[sizes[props.size], `duration-${props.speed.replace('s', '')}`]"
       viewBox="0 0 24 24"
     >
       <circle
@@ -32,13 +32,13 @@ const sizes = {
         cx="12"
         cy="12"
         r="10"
-        :stroke="color"
-        :stroke-width="thickness"
+        :class="`stroke-${props.color}`"
+        :stroke-width="props.thickness"
         fill="none"
       />
       <path
         class="opacity-75"
-        fill="currentColor"
+        :class="`fill-${props.color}`"
         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
       />
     </svg>
