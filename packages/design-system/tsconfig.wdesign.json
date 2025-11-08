@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "types": [
+      "../types/design-system"
+    ],
+    "paths": {
+      "#wdesign/*": ["../app/*"],
+      "#wdesign/components": ["../app/components"],
+      "#wdesign/composables": ["../app/composables"],
+      "#wdesign/utils": ["../app/utils"]
+    }
+  },
+  "include": [
+    "../app/**/*",
+    "../types/**/*"
+  ]
+}

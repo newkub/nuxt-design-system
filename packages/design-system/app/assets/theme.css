@@ -1,0 +1,262 @@
+/**
+ * Wrikka Design System - Theme Variables
+ * 3 Themes x 2 Modes (Light/Dark) = 6 variants
+ */
+
+/* ==================== DEFAULT THEME ==================== */
+
+/* Default Theme - Light Mode */
+:root,
+:root[data-theme="default"] {
+  /* Background Colors */
+  --background-normal: #ffffff;
+  --background-active: #f5f5f5;
+
+  /* Border Colors */
+  --border-normal: #e5e5e5;
+  --border-active: #d4d4d4;
+
+  /* Primary Colors */
+  --primary-normal: #0ea5e9;
+  --primary-active: #0284c7;
+
+  /* Danger Colors */
+  --danger-normal: #ef4444;
+  --danger-active: #dc2626;
+
+  /* Info Colors */
+  --info-normal: #3b82f6;
+  --info-active: #2563eb;
+
+  /* Success Colors */
+  --success-normal: #10b981;
+  --success-active: #059669;
+
+  /* Warning Colors */
+  --warning-normal: #f59e0b;
+  --warning-active: #d97706;
+}
+
+/* Default Theme - Dark Mode */
+.dark,
+.dark[data-theme="default"] {
+  /* Background Colors */
+  --background-normal: #1a1a1a;
+  --background-active: #262626;
+
+  /* Border Colors */
+  --border-normal: #404040;
+  --border-active: #525252;
+
+  /* Primary Colors */
+  --primary-normal: #38bdf8;
+  --primary-active: #0ea5e9;
+
+  /* Danger Colors */
+  --danger-normal: #f87171;
+  --danger-active: #ef4444;
+
+  /* Info Colors */
+  --info-normal: #60a5fa;
+  --info-active: #3b82f6;
+
+  /* Success Colors */
+  --success-normal: #34d399;
+  --success-active: #10b981;
+
+  /* Warning Colors */
+  --warning-normal: #fbbf24;
+  --warning-active: #f59e0b;
+}
+
+/* ==================== OCEAN THEME ==================== */
+
+/* Ocean Theme - Light Mode */
+:root[data-theme="ocean"] {
+  /* Background Colors */
+  --background-normal: #f0f9ff;
+  --background-active: #e0f2fe;
+
+  /* Border Colors */
+  --border-normal: #bae6fd;
+  --border-active: #7dd3fc;
+
+  /* Primary Colors */
+  --primary-normal: #0284c7;
+  --primary-active: #0369a1;
+
+  /* Danger Colors */
+  --danger-normal: #dc2626;
+  --danger-active: #b91c1c;
+
+  /* Info Colors */
+  --info-normal: #0891b2;
+  --info-active: #0e7490;
+
+  /* Success Colors */
+  --success-normal: #059669;
+  --success-active: #047857;
+
+  /* Warning Colors */
+  --warning-normal: #ea580c;
+  --warning-active: #c2410c;
+}
+
+/* Ocean Theme - Dark Mode */
+.dark[data-theme="ocean"] {
+  /* Background Colors */
+  --background-normal: #082f49;
+  --background-active: #0c4a6e;
+
+  /* Border Colors */
+  --border-normal: #075985;
+  --border-active: #0369a1;
+
+  /* Primary Colors */
+  --primary-normal: #22d3ee;
+  --primary-active: #06b6d4;
+
+  /* Danger Colors */
+  --danger-normal: #f87171;
+  --danger-active: #ef4444;
+
+  /* Info Colors */
+  --info-normal: #22d3ee;
+  --info-active: #06b6d4;
+
+  /* Success Colors */
+  --success-normal: #2dd4bf;
+  --success-active: #14b8a6;
+
+  /* Warning Colors */
+  --warning-normal: #fb923c;
+  --warning-active: #f97316;
+}
+
+/* ==================== FOREST THEME ==================== */
+
+/* Forest Theme - Light Mode */
+:root[data-theme="forest"] {
+  /* Background Colors */
+  --background-normal: #f0fdf4;
+  --background-active: #dcfce7;
+
+  /* Border Colors */
+  --border-normal: #bbf7d0;
+  --border-active: #86efac;
+
+  /* Primary Colors */
+  --primary-normal: #16a34a;
+  --primary-active: #15803d;
+
+  /* Danger Colors */
+  --danger-normal: #dc2626;
+  --danger-active: #b91c1c;
+
+  /* Info Colors */
+  --info-normal: #0891b2;
+  --info-active: #0e7490;
+
+  /* Success Colors */
+  --success-normal: #10b981;
+  --success-active: #059669;
+
+  /* Warning Colors */
+  --warning-normal: #f59e0b;
+  --warning-active: #d97706;
+}
+
+/* Forest Theme - Dark Mode */
+.dark[data-theme="forest"] {
+  /* Background Colors */
+  --background-normal: #14532d;
+  --background-active: #166534;
+
+  /* Border Colors */
+  --border-normal: #15803d;
+  --border-active: #16a34a;
+
+  /* Primary Colors */
+  --primary-normal: #4ade80;
+  --primary-active: #22c55e;
+
+  /* Danger Colors */
+  --danger-normal: #f87171;
+  --danger-active: #ef4444;
+
+  /* Info Colors */
+  --info-normal: #22d3ee;
+  --info-active: #06b6d4;
+
+  /* Success Colors */
+  --success-normal: #34d399;
+  --success-active: #10b981;
+
+  /* Warning Colors */
+  --warning-normal: #fbbf24;
+  --warning-active: #f59e0b;
+}
+
+/* ==================== THAILAND NIGHT THEME ==================== */
+
+/* Thailand Night Theme - Light Mode */
+:root[data-theme="Thailand Night"] {
+  /* Background Colors */
+  --background-normal: #fef3c7;
+  --background-active: #fde68a;
+
+  /* Border Colors */
+  --border-normal: #fcd34d;
+  --border-active: #fbbf24;
+
+  /* Primary Colors */
+  --primary-normal: #d97706;
+  --primary-active: #b45309;
+
+  /* Danger Colors */
+  --danger-normal: #dc2626;
+  --danger-active: #b91c1c;
+
+  /* Info Colors */
+  --info-normal: #0891b2;
+  --info-active: #0e7490;
+
+  /* Success Colors */
+  --success-normal: #059669;
+  --success-active: #047857;
+
+  /* Warning Colors */
+  --warning-normal: #ea580c;
+  --warning-active: #c2410c;
+}
+
+/* Thailand Night Theme - Dark Mode */
+.dark[data-theme="Thailand Night"] {
+  /* Background Colors */
+  --background-normal: #1e1b4b;
+  --background-active: #312e81;
+
+  /* Border Colors */
+  --border-normal: #4338ca;
+  --border-active: #6366f1;
+
+  /* Primary Colors */
+  --primary-normal: #fbbf24;
+  --primary-active: #f59e0b;
+
+  /* Danger Colors */
+  --danger-normal: #f87171;
+  --danger-active: #ef4444;
+
+  /* Info Colors */
+  --info-normal: #60a5fa;
+  --info-active: #3b82f6;
+
+  /* Success Colors */
+  --success-normal: #34d399;
+  --success-active: #10b981;
+
+  /* Warning Colors */
+  --warning-normal: #fb923c;
+  --warning-active: #f97316;
+}
