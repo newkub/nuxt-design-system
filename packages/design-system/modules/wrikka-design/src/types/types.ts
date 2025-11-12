@@ -1,5 +1,5 @@
 import type { WrikkaThemeOptions } from './core-types'
-import type { AutoReexportConfig } from '../../app/plugins/re-export/types'
+import type { AutoReexportConfig } from '@wrikka/re-export-plugin'
 
 /**
  * Design System Module Options

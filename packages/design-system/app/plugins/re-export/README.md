@@ -1,18 +1,18 @@
-# Auto Re-export Plugin
+# Auto Re-Export Plugin
 
-Vite plugin สำหรับ auto-generate re-export files (index.ts) ใน component folders
+A Vite plugin to automatically generate re-export index files for specified directories. This simplifies imports and helps maintain a clean project structure.
 
-## ฟีเจอร์
+## Features
 
-- ✅ Auto-generate `index.ts` ในแต่ละ folder
-- ✅ Auto-generate root `index.ts` ที่ re-export จากทุก folders
-- ✅ Watch mode สำหรับ development
-- ✅ Configurable (folders, extensions, export style)
+- ✅ Auto-generate `index.ts` in each specified directory
+- ✅ Auto-generate a root `index.ts` that re-exports from all generated directory barrels
+- ✅ Watch mode for development
+- ✅ Configurable (directories, extensions, export style)
 - ✅ TypeScript support with full autocomplete
 
-## การใช้งาน
+## Usage
 
-### ใน Vite Config
+### In Vite Config
 
 ```ts
 import { autoReexport } from './app/plugins/re-export'
@@ -31,23 +31,23 @@ export default defineNuxtConfig({
 })
 ```
 
-### ตัวเลือกการตั้งค่า
+### Configuration Options
 
 ```ts
 interface AutoReexportConfig {
-  /** Base path สำหรับ components */
+  /** Base path for components */
   basePath?: string // default: 'app/components'
   
-  /** Folders ที่ต้องการ auto-generate */
+  /** Directories to scan for files */
   folders?: string[] // default: auto-detect
   
-  /** Folders ที่ต้องการข้าม */
+  /** Directories to exclude */
   exclude?: string[] // default: ['node_modules', '.nuxt', 'dist']
   
-  /** File extensions ที่ต้องการ export */
+  /** File extensions to export */
   extensions?: string[] // default: ['.vue', '.ts', '.tsx']
   
-  /** ชื่อไฟล์ output */
+  /** Output file name */
   outputFileName?: string // default: 'index.ts'
   
   /** Export style: 'default' | 'named' */
