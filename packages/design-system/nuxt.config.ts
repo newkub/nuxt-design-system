@@ -52,7 +52,6 @@ export default defineNuxtConfig({
 		autoImport: false,
 	},
 
-	// ✨ Vite Configuration
 	vite: {
 		plugins: [
 			// Auto Re-export Components
