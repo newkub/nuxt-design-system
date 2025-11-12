@@ -1,5 +1,5 @@
 {
-  "name": "@wrikka/vue-design-system",
+  "name": "@wrikka/nuxt-design-system",
   "version": "1.0.0",
   "type": "module",
   "main": "./index.ts",

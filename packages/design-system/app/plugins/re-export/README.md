@@ -53,32 +53,32 @@ interface AutoReexportConfig {
   /** Export style: 'default' | 'named' */
   exportStyle?: 'default' | 'named' // default: 'default'
   
-  /** เพิ่ม header comment */
+  /** Add header comment */
   addHeader?: boolean // default: true
-  
+
   /** Custom header text */
   headerText?: string
-  
+
   /** Sort exports alphabetically */
   sortAlphabetically?: boolean // default: true
-  
+
   /** Watch mode (dev only) */
   watch?: boolean // default: true
-  
+
   /** Verbose logging */
   verbose?: boolean // default: false
-  
-  /** สร้าง root index.ts */
+
+  /** Generate root index.ts */
   generateRootIndex?: boolean // default: false
-  
-  /** Path สำหรับ root index.ts */
+
+  /** Path for root index.ts */
   rootIndexPath?: string // default: 'app'
 }
 ```
 
-## ตัวอย่าง
+## Examples
 
-### ตัวอย่างที่ 1: Basic Setup
+### Example 1: Basic Setup
 
 ```ts
 autoReexport({
@@ -87,7 +87,7 @@ autoReexport({
 })
 ```
 
-### ตัวอย่างที่ 2: With Root Index
+### Example 2: With Root Index
 
 ```ts
 autoReexport({
@@ -98,7 +98,7 @@ autoReexport({
 })
 ```
 
-### ตัวอย่างที่ 3: Named Exports
+### Example 3: Named Exports
 
 ```ts
 autoReexport({
@@ -107,7 +107,7 @@ autoReexport({
 })
 ```
 
-### ตัวอย่างที่ 4: Custom Configuration
+### Example 4: Custom Configuration
 
 ```ts
 autoReexport({
@@ -133,17 +133,17 @@ app/plugins/re-export/
 └── README.md        # Documentation
 ```
 
-## การทดสอบ
+## Testing
 
-รัน test script:
+Run the test script:
 
 ```bash
 bun run app/plugins/re-export/test.ts
 ```
 
-## Migration จาก Nuxt Module
+## Migration from Nuxt Module
 
-### เดิม (Nuxt Module)
+### Before (Nuxt Module)
 
 ```ts
 export default defineNuxtConfig({
@@ -155,7 +155,7 @@ export default defineNuxtConfig({
 })
 ```
 
-### ใหม่ (Vite Plugin)
+### After (Vite Plugin)
 
 ```ts
 import { autoReexport } from './app/plugins/re-export'
@@ -172,9 +172,9 @@ export default defineNuxtConfig({
 })
 ```
 
-## หมายเหตุ
+## Notes
 
-- Plugin จะ generate files ตอน build start และ watch changes ใน dev mode
-- Root index จะถูกสร้างที่ `rootIndexPath/index.ts` (default: `app/index.ts`)
-- ไฟล์ที่ถูก generate จะมี header comment บอกว่าเป็น auto-generated
-- Watch mode จะทำงานเฉพาะใน development mode เท่านั้น
+- The plugin generates files at the start of the build and watches for changes in dev mode.
+- The root index will be created at `rootIndexPath/index.ts` (default: `app/index.ts`).
+- Generated files will have a header comment indicating they are auto-generated.
+- Watch mode only works in development mode.

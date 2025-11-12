@@ -1,4 +1,4 @@
-# @wrikka/vue-design-system
+# @wrikka/nuxt-design-system
 
 Wrikka Design System - Nuxt-based component library
 

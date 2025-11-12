@@ -8,7 +8,7 @@
     <div class="space-y-6">
       <div class="border rounded-lg p-4">
         <h2 class="text-lg font-medium mb-2">Installation</h2>
-        <code class="bg-gray-100 p-2 rounded block">bun add @wrikka/vue-design-system</code>
+        <code class="bg-gray-100 p-2 rounded block">bun add @wrikka/nuxt-design-system</code>
       </div>
       
       <div class="border rounded-lg p-4">
@@ -16,13 +16,13 @@
         <p class="mb-2">Import components directly in your Vue files:</p>
         <code class="bg-gray-100 p-2 rounded block mb-4">
           &lt;script setup&gt;
-          import { Button } from '@wrikka/vue-design-system'
+          import { Button } from '@wrikka/nuxt-design-system'
           &lt;/script&gt;
         </code>
         
         <p class="mb-2">Or import composables:</p>
         <code class="bg-gray-100 p-2 rounded block">
-          import { useTheme } from '@wrikka/vue-design-system'
+          import { useTheme } from '@wrikka/nuxt-design-system'
         </code>
       </div>
       
@@ -30,7 +30,7 @@
         <h2 class="text-lg font-medium mb-2">Theme Setup</h2>
         <p>Import the theme CSS in your main.ts:</p>
         <code class="bg-gray-100 p-2 rounded block mt-2">
-          import '@wrikka/vue-design-system/theme.css'
+          import '@wrikka/nuxt-design-system/theme.css'
         </code>
       </div>
     </div>
