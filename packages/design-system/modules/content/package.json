@@ -1,0 +1,28 @@
+{
+  "name": "@modules/content",
+  "version": "1.0.0",
+  "description": "Content module for Docs2",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "tsdown --watch --exports --dts",
+    "lint": "bunx tsc --noEmit && bunx oxlint --fix"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.0.0",
+    "nuxt": "^4.2.1"
+  },
+  "devDependencies": {
+    "tsdown": "^0.16.4",
+    "typescript": "^5.0.0"
+  },
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "module": "./dist/index.mjs"
+}
