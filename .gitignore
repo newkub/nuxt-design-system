@@ -28,3 +28,6 @@ logs
 
 # Turborepo
 .turbo
+
+# Sonda
+.sonda/
