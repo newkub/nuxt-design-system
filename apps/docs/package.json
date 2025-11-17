@@ -13,6 +13,6 @@
     "nuxt": "4.2.1"
   },
   "dependencies": {
-    "@wrikka/wdocs-ui": "workspace:*"
+    "@wrikka/docs": "workspace:*"
   }
 }

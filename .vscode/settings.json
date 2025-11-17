@@ -1,0 +1,6 @@
+{
+    "bun.runtime": "c:\\users\\veerapong\\appdata\\local\\mise\\shims\\bun.exe",
+    "debug.javascript.defaultRuntimeExecutable": {
+        "pwa-node": "c:\\users\\veerapong\\appdata\\local\\mise\\shims\\node"
+    }
+}
